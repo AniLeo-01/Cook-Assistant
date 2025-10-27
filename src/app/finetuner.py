@@ -32,7 +32,8 @@ def format_conversation(example, tokenizer):
     )
     return {"text": text}
 
-if __name__ == "__main__":
+def train():
+    """Main training function that sets up and runs the fine-tuning process."""
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, trust_remote_code=True, use_fast=True)
     model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, dtype=torch.bfloat16)
     # model.unload()
@@ -94,3 +95,6 @@ if __name__ == "__main__":
     )
 
     trainer.train()
+
+if __name__ == "__main__":
+    train()
