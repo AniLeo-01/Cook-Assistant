@@ -6,8 +6,9 @@
 # generate_qa_pair_samples -> 40k (sourced from fifth 40K samples)
 
 import asyncio
+import json
 from src.utils.data_generators import generate_recipe_samples, generate_ingredient_extraction_samples, constraint_generator_samples, recipe_summary_samples, generate_qa_pair_samples
-from src.utils.io_utils import load_json, save_json
+from src.utils.io_utils import load_json, save_json, save_jsonl
 from tqdm.asyncio import tqdm_asyncio
 from tqdm import tqdm
 
@@ -163,7 +164,32 @@ async def create_instruction_tuned_dataset():
     
     return final_dataset
 
+
+
+async def convert_conversations():
+    """
+    Convert a list of conversations (each conversation is a list of message dicts)
+    into a list of dicts with the key 'conversations' -> list[ {role, content}, ... ].
+    """
+    with open('Cook-Assistant/dataset/processed/instruction_tuned_dataset.json', 'r') as f:
+        data = json.load(f)
+    if not isinstance(data, list):
+        raise ValueError("Input must be a list of conversations.")
+    for i, convo in enumerate(data):
+        if not isinstance(convo, list):
+            raise ValueError(f"Conversation at index {i} must be a list of message dicts.")
+        for j, msg in enumerate(convo):
+            if not isinstance(msg, dict):
+                raise ValueError(f"Message at conversation {i}, index {j} must be a dict.")
+            if "role" not in msg or "content" not in msg:
+                raise ValueError(f"Message at conversation {i}, index {j} must have 'role' and 'content' keys.")
+    save_jsonl(data, "dataset/processed/instruction_tuned_dataset_processed.jsonl")
+    return [{"conversations": convo} for convo in data]
+
+
+
 if __name__ == "__main__":
     asyncio.run(create_dataset_subsets())
     # Run the dataset creation pipeline
     asyncio.run(create_instruction_tuned_dataset())
+    asyncio.run(convert_conversations())

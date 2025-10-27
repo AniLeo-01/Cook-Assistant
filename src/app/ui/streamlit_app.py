@@ -8,9 +8,10 @@ import streamlit as st
 import requests
 from typing import List, Optional
 import json
+import os
 
 # Configuration
-API_BASE_URL = "http://localhost:8080"
+API_BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8080")
 
 # Page configuration
 st.set_page_config(

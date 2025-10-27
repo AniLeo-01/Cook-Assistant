@@ -13,6 +13,11 @@ def save_json(data, file_path):
         os.makedirs(dir_path, exist_ok=True)
     with open(file_path, 'w') as file:
         json.dump(data, file, indent=4)
+
+def save_jsonl(data, file_path):
+    with open(file_path, 'w', encoding='utf-8') as f:
+        for ex in data:
+            f.write(json.dumps(ex, ensure_ascii=False) + "\n")
         
 def process_str_to_list(file_path, save_path):
     json_data = load_json(file_path)

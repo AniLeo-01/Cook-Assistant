@@ -1,0 +1,7 @@
+# Production requirements
+# Include base requirements
+-r requirements.txt
+
+# Production web server
+gunicorn==21.2.0
+

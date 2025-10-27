@@ -9,7 +9,7 @@ class Config:
     """Application configuration."""
     
     # Modal API Configuration
-    MODAL_API_KEY = os.getenv("MODAL_API_KEY", "2is0Irr9q7")
+    MODAL_API_KEY = os.getenv("MODAL_API_KEY")
     MODAL_BASE_URL = "https://v-ibe--cook-assistant-v1-serve.modal.run/v1"
     
     # Server Configuration

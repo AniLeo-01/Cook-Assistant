@@ -1,9 +1,12 @@
 from openai import OpenAI
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def main():
     # Initialize the OpenAI client
-    client = OpenAI(api_key="2is0Irr9q7")
+    client = OpenAI(api_key=os.getenv("MODAL_API_KEY"))
     
     # Set the base URL for the OpenAI-compatible API
     client.base_url = "https://v-ibe--cook-assistant-v1-serve.modal.run/v1"
