@@ -581,43 +581,6 @@ python run_backend.py
 docker-compose run --rm -e LOG_LEVEL=debug backend python run_backend.py
 ```
 
-## 🤝 Contributing
-
-Contributions are welcome! Here's how to contribute:
-
-1. **Fork the repository**
-2. **Create a feature branch**
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Make your changes**
-   - Follow PEP 8 style guide
-   - Add tests for new features
-   - Update documentation
-4. **Run tests and linting**
-   ```bash
-   pytest
-   black src/
-   flake8 src/
-   ```
-5. **Commit your changes**
-   ```bash
-   git commit -m 'Add amazing feature'
-   ```
-6. **Push to your branch**
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-7. **Open a Pull Request**
-
-### Development Guidelines
-
-- Write clear, descriptive commit messages
-- Add docstrings to all functions and classes
-- Include type hints where applicable
-- Write tests for new functionality
-- Update README.md if adding new features
-
 ## 🛠️ Technologies Used
 
 - **Backend:** FastAPI, Uvicorn, Python 3.10+
